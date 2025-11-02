@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework of Lesson {{ lesson.name }}</title>
+</head>
+<body>
+    <h1>Homework of Lesson {{ lesson.name }}</h1>
+    <p>{{ homework.description }}</p>
+
+    <h2>Submit homework</h2>
+    {% if homework_submission %}
+        Submitted
+    {% else %}
+        <form action="/student/homeworks/{{ homework.id }}/submission/" method="post">
+            {% csrf_token %}
+            <p>
+                <label for="content">Homework:</label>
+                <textarea id="content" name="content" required></textarea>
+            </p>
+
+            <input type="submit" value="Submit">
+        </form>
+    {% endif %}
+
+    <h3>Homework's grade</h3>
+    {% if grade %}
+        <p>Grade: {{ grade }}</p>
+    {% else %}
+        <p>Grade is not set yet</p>
+    {% endif %}
+</body>
+</html>

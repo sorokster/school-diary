@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ subject.name }} Lessons</title>
+</head>
+<body>
+    <h1>Lessons:</h1>
+    {% if lessons %}
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Description</td>
+                    <td>Room number</td>
+                    <td>Date</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for lesson in lessons %}
+                <tr>
+                    <td><a href="/student/subjects/{{ subject.id }}/lessons/{{ lesson.id }}/">{{ lesson.name }}</a></td>
+                    <td>{{ lesson.description }}</td>
+                    <td>{{ lesson.room.number }}</td>
+                    <td>{{ lesson.date }}</td>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No subjects found</p>
+    {% endif %}
+</body>
+</html>

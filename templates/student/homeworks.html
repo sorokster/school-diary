@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homeworks</title>
+</head>
+<body>
+    <h1>Homework of {{ lesson.name }}</h1>
+
+    {% if homeworks %}
+        {% for homework in homeworks %}
+            <p><a href="/student/lessons/{{ lesson.id }}/homeworks/{{ homework.id }}">Homework of {{ lesson.name }}{{ forloop.counter }}</a></p>
+        {% endfor %}
+    {% else %}
+        <p>No Homeworks</p>
+    {% endif %}
+</body>
+</html>

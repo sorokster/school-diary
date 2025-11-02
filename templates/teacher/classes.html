@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classes</title>
+</head>
+<body>
+    <h1>Add a new class</h1>
+    <form action="/teacher/classes/" method="POST">
+        {% csrf_token %}
+        <p>
+            <label for="name">
+                Name:
+                <input type="text" name="name" id="name">
+            </label>
+        </p>
+        <p>
+            <label for="students">
+                Students:
+                <select name="students" id="students" multiple>
+                    {% for student in students %}
+                        <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </p>
+        <input type="submit" value="Add">
+    </form>
+
+    <h2>Classes:</h2>
+    {% if classes %}
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Students</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for class in classes %}
+                <tr>
+                    <td><a href="/teacher/classes/{{ class.id }}/">{{ class.name }}</a></td>
+                    <td>
+                        {% for student in class.students.all %}
+                            {{ student.first_name }} {{ student.last_name }}<br>
+                        {% empty %}
+                            No students
+                        {% endfor %}
+                    </td>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No classes found</p>
+    {% endif %}
+</body>
+</html>

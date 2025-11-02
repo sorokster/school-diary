@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class {{ class.name }}</title>
+</head>
+<body>
+    {% if class %}
+        <h2>Class {{ class.name }}</h2>
+        <h3>Students:</h3>
+        {% for student in class.students.all %}
+            <p>{{ student.first_name }} {{ student.last_name }}</p>
+        {% empty %}
+            <p>No students</p>
+        {% endfor %}
+
+        <h3>Lessons:</h3>
+        {% for lesson in lessons %}
+            <p><a href="/teacher/lessons/{{ lesson.id }}">{{ lesson.name }}</p>
+        {% empty %}
+            No Lessons
+        {% endfor %}
+    {% else %}
+        <p>No classes found</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooms</title>
+</head>
+<body>
+    <h1>Add a new room</h1>
+    <form action="/teacher/rooms/" method="POST">
+        {% csrf_token %}
+        <p>
+            <label for="number">
+                Number:
+                <input type="text" name="number" id="number">
+            </label>
+        </p>
+        <input type="submit" value="Add">
+    </form>
+
+    <h2>Rooms:</h2>
+    {% if rooms %}
+        <table>
+            <thead>
+                <tr>
+                    <td>Number</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for room in rooms %}
+                <tr>
+                    <td><a href="/teacher/rooms/{{ room.id }}">{{ room.number }}</a></td>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No rooms found</p>
+    {% endif %}
+</body>
+</html>

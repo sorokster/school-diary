@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework of Lesson {{ lesson.name }}</title>
+</head>
+<body>
+    <h1>Homework of Lesson {{ lesson.name }}</h1>
+    <p>{{ homework.description }}</p>
+
+    <h2>Grades</h2>
+    {% if students %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.first_name }} {{ student.last_name }}</td>
+                        <td>
+                            {% if student.grade %}
+                                {{ student.grade }}
+                            {% else %}
+                                {% if student.submission %}
+                                    Submission: {{ student.submission.content }}
+                                    <form action="/teacher/homeworks/{{ homework.id }}/grade/" method="POST">
+                                        {% csrf_token %}
+                                        <label for="grades">
+                                            Grade:
+                                            <select name="grade" id="grades">
+                                                {% for i in grades_range %}
+                                                    <option value="{{ i }}">{{ i }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </label>
+                                        <input type="text" name="feedback">
+                                        <input type="hidden" name="student" value="{{ student.id }}">
+
+                                        <input type="submit" value="Submit">
+                                    </form>
+                                {% else %}
+                                    <p>Not submitted yet</p>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No students yet.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects</title>
+</head>
+<body>
+    <h2>Subjects:</h2>
+    {% if subjects %}
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Description</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for subject in subjects %}
+                <tr>
+                    <td><a href="/student/subjects/{{ subject.id }}">{{ subject.name }}</a></td>
+                    <td>{{ subject.description }}</td>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No subjects found</p>
+    {% endif %}
+</body>
+</html>

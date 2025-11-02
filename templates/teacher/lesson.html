@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson {{ lesson.name }}</title>
+</head>
+<body>
+    <h2>Name: {{ lesson.name }}</h2>
+    <p>Description: {{ lesson.description }}</p>
+    <p>Subject: <a href="/teacher/subjects/{{ lesson.subject.id }}">{{ lesson.subject.name }}</a></p>
+    <p>Room <a href="/teacher/rooms/{{ lesson.room.id }}">{{ lesson.room.number }}</a></p>
+    <p>Class: <a href="/teacher/classes/{{ lesson.school_class.id }}">{{ lesson.school_class.name }}</a></p>
+    <p>Date: {{ lesson.date }}</p>
+
+    <p><a href="/teacher/lessons/{{ lesson.id }}/homeworks/">Go to homework</a></p>
+</body>
+</html>

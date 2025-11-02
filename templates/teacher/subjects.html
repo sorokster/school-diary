@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects</title>
+</head>
+<body>
+    <h1>Add a new subject</h1>
+    <form action="/teacher/subjects/" method="POST">
+        {% csrf_token %}
+        <p>
+            <label for="name">
+                Name:
+                <input type="text" name="name" id="name">
+            </label>
+        </p>
+        <p>
+            <label for="description">
+                Description:
+                <input type="text" name="description" id="description">
+            </label>
+        </p>
+        <input type="submit" value="Add">
+    </form>
+
+    <h2>Subjects:</h2>
+    {% if subjects %}
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Description</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for subject in subjects %}
+                <tr>
+                    <td><a href="/teacher/subjects/{{ subject.id }}">{{ subject.name }}</a></td>
+                    <td>{{ subject.description }}</td>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No subjects found</p>
+    {% endif %}
+</body>
+</html>

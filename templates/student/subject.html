@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subject {{ subject.name }}</title>
+</head>
+<body>
+    <h1>Subject {{ subject.name }}</h1>
+    <p>Description: {{ subject.description }}</p>
+
+    <h2>Lessons</h2>
+    {% for lesson in lessons %}
+        <h3><a href="/student/subjects/{{ subject.id }}/lessons/">Name: {{ lesson.name }}</a></h3>
+        <p>Description: {{ lesson.description }}</p>
+        <p>Room {{ lesson.room.number }}</p>
+        <p>Date: {{ lesson.date }}</p>
+    {% endfor %}
+</body>
+</html>

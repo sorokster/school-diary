@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homeworks</title>
+</head>
+<body>
+    <h1>Homework of {{ lesson.name }}</h1>
+
+    <h2>Add homework:</h2>
+    <form action="/teacher/lessons/{{ lesson.id }}/homeworks/" method="post">
+        {% csrf_token %}
+        <input type="text" name="description">
+        <input type="submit" value="Add Homework">
+    </form>
+
+    {% if homeworks %}
+        {% for homework in homeworks %}
+            <p><a href="/teacher/lessons/{{lesson.id}}/homeworks/{{ homework.id }}">Homework of {{ lesson.name }}{{ forloop.counter }}</a></p>
+            <p>{{ homework.description }}</p>
+        {% endfor %}
+    {% else %}
+        <p>No Homeworks</p>
+    {% endif %}
+</body>
+</html>
