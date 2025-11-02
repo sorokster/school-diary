@@ -234,17 +234,16 @@ class GradeView(View):
     @staticmethod
     @group_required('teacher')
     def post(request, homework_id):
-        try:
-            submission = HomeworkSubmission.objects.get(
-                homework_id=homework_id,
-                student_id=request.POST['student'],
-            )
-        except HomeworkSubmission.DoesNotExist:
-            return redirect(f'/teacher/homeworks/{homework_id}/')
+        submission = HomeworkSubmission.objects.get(
+            homework_id=homework_id,
+            student_id=request.POST['student'],
+        )
+        current_homework = submission.homework
+        current_lesson = current_homework.lesson
 
         grade_value = request.POST.get('grade')
         if not grade_value or not grade_value.isdigit():
-            return redirect(f'/teacher/homeworks/{homework_id}/')
+            return redirect(f'/teacher/lessons/{current_lesson.pk}homeworks/{homework_id}/')
 
         created_grade = Grade(
             grade=int(grade_value),
@@ -254,4 +253,4 @@ class GradeView(View):
         )
         created_grade.save()
 
-        return redirect(f'/teacher/homeworks/{homework_id}/')
+        return redirect(f'/teacher/lessons/{current_lesson.pk}homeworks/{homework_id}/')
